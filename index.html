@@ -2,7 +2,7 @@
 <html lang="da">
 <head>
   <meta charset="UTF-8">
-  <title>????</title>
+  <title>?????</title>
   <style>
     body {
       font-family: sans-serif;
@@ -16,19 +16,40 @@
       font-size: 12px;
       cursor: pointer;
     }
+    .hemmelig {
+      background-color: red;
+      color: white;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <script>
     const antalKnapper = 9999;
-    const specielKnap = Math.floor(Math.random() * antalKnapper); // Én tilfældig knap
+    const specielKnap = Math.floor(Math.random() * antalKnapper);
+    let trykPå9999 = 0;
+
+    let knapper = [];
 
     for (let i = 0; i < antalKnapper; i++) {
       const knap = document.createElement("button");
       knap.textContent = `Knap ${i + 1}`;
+
       if (i === specielKnap) {
         knap.onclick = () => alert("hej");
       }
+
+      if (i === 9998) { // Knap nummer 9999 (index 9998)
+        knap.onclick = () => {
+          trykPå9999++;
+          if (trykPå9999 === 30) {
+            knapper[specielKnap].classList.add("hemmelig");
+            alert("Den hemmelige knap er blevet afsløret!");
+          }
+        };
+      }
+
+      knapper.push(knap);
       document.body.appendChild(knap);
     }
   </script>
