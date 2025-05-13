@@ -2,7 +2,7 @@
 <html lang="da">
 <head>
   <meta charset="UTF-8">
-  <title>?????</title>
+  <title>9999 Knapper - Gravitationseffekt</title>
   <style>
     body {
       font-family: sans-serif;
@@ -10,11 +10,23 @@
       flex-wrap: wrap;
       gap: 4px;
       padding: 10px;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
     }
     button {
       padding: 6px;
       font-size: 12px;
       cursor: pointer;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    .gravitation {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.7;
+      transition: top 1s ease-in;
     }
     .hemmelig {
       background-color: red;
@@ -28,6 +40,7 @@
     const antalKnapper = 9999;
     const specielKnap = Math.floor(Math.random() * antalKnapper);
     let trykPå9999 = 0;
+    let trykPå1 = 0;
 
     let knapper = [];
 
@@ -35,16 +48,31 @@
       const knap = document.createElement("button");
       knap.textContent = `Knap ${i + 1}`;
 
+      // Knap med alert
       if (i === specielKnap) {
         knap.onclick = () => alert("hej");
       }
 
-      if (i === 9998) { // Knap nummer 9999 (index 9998)
+      // Knap 9999 → viser den rigtige knap efter 30 klik
+      if (i === 9998) {
         knap.onclick = () => {
           trykPå9999++;
           if (trykPå9999 === 30) {
             knapper[specielKnap].classList.add("hemmelig");
             alert("Den hemmelige knap er blevet afsløret!");
+          }
+        };
+      }
+
+      // Knap 1 → giver gravitationseffekt efter 10 klik
+      if (i === 0) {
+        knap.onclick = () => {
+          trykPå1++;
+          if (trykPå1 === 10) {
+            knapper.forEach(k => {
+              k.classList.add("gravitation");
+            });
+            alert("Alle knapper har fået gravitation og falder!");
           }
         };
       }
