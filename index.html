@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>????</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 10px;
+    }
+    button {
+      padding: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const antalKnapper = 9999;
+    const specielKnap = Math.floor(Math.random() * antalKnapper); // Én tilfældig knap
+
+    for (let i = 0; i < antalKnapper; i++) {
+      const knap = document.createElement("button");
+      knap.textContent = `Knap ${i + 1}`;
+      if (i === specielKnap) {
+        knap.onclick = () => alert("hej");
+      }
+      document.body.appendChild(knap);
+    }
+  </script>
+</body>
+</html>
